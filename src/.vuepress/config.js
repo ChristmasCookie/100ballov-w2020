@@ -3,6 +3,7 @@ const { description } = require('../../package')
 module.exports = {
   base: '/100ballov-w2020/',
   title: '100ballov w2020',
+  dest: './dist',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
