@@ -33,18 +33,27 @@ module.exports = {
     lastUpdated: false,
     nav: [
       {
-        text: 'Введение',
+        text: 'Руководство',
         link: '/guide/',
       },
     ],
     sidebar: {
       '/guide/': [
         {
-          title: 'Введение',
+          title: 'Руководство',
           collapsable: false,
           children: [
             '',
             'before-start',
+            {
+              title: 'Компоненты',
+              collapsable: false,
+              children: [
+                'components/',
+                'components/base',
+                'components/advanced',
+              ]
+            }
           ]
         }
       ],
