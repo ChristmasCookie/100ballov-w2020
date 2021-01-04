@@ -19,14 +19,14 @@
 
 ## Search Input
 
-Для `input`, который находится между двумя иконками должен занимать все оставшиеся свободной место. Чтобы использовать в `placeholder` свойство (**props**), необходимо перед названием атрибута добавить `:` или `v-bind:`, к примеру:
+Для `input`, который находится между двумя иконками должен занимать все оставшиеся свободной место. И еще у него необходимо убрать `outline` (границу со всех четырех сторон). Чтобы использовать в `placeholder` свойство (**props**), необходимо перед названием атрибута добавить `:` или `v-bind:`, к примеру:
 ``` vue{2}
 <input 
   type="text" 
   :placeholder="placeholder" 
 >
 ```
-В данной записи правое значение (справа от равно) является JS переменной.
+В данной записи `:` обозначает, что в правой части (справа от равно) будет находиться JS выражение (или переменная).
 
 ::: tip
 Если у элемента более 1 атрибута, то их можно перенести на следующие строки (1 строка = 1 атрибут). Это делается для улучшения читаемости кода.
@@ -35,6 +35,7 @@
 В помощь:
 - [flex-grow](https://developer.mozilla.org/ru/docs/Web/CSS/flex-grow)
 - [border-radius](https://developer.mozilla.org/ru/docs/Web/CSS/border-radius)
+- [outline](https://developer.mozilla.org/en-US/docs/Web/CSS/outline)
 - Для выравнивания
   - [flexbox](https://developer.mozilla.org/ru/docs/Learn/CSS/CSS_layout/Flexbox)
   - [align-items](https://developer.mozilla.org/ru/docs/Web/CSS/align-items)
@@ -98,7 +99,7 @@ active: {
 ```
 
 В помощь:
-- [vue классы и стили](https://ru.vuejs.org/v2/guide/class-and-style.html)
+- [vue css классы и стили](https://ru.vuejs.org/v2/guide/class-and-style.html)
 - [логические операторы](https://learn.javascript.ru/logical-operators)
 - [массивы](https://learn.javascript.ru/array)
 
@@ -118,6 +119,7 @@ active: {
 ## Avatar
 
 `src`, `height` и `width` являются динамическими, следовательно они могут быть получены через **props**.
+Необходимые аватары (картинки) лежат в `public/images`. Пример использования: `src="/images/avatar.jpg"` 
 
 Не забудьте добавить `border` к картинке. 
 
@@ -126,6 +128,54 @@ active: {
 - [border](https://developer.mozilla.org/ru/docs/Web/CSS/border)
 - [border-radius](https://developer.mozilla.org/ru/docs/Web/CSS/border-radius)
 
-## In progress...
+## Chat message
 
-Остальные компоненты будут скоро добавлены.
+Данный компонент будет распологаться слева (сообщения собеседника) или справа (свои сообщения) в контейнере чата (который должен иметь ```display: flex```). Поэтому будет хорошо, если компонент будет иметь свойство `right` или `left`. Если свойство имеется, то должен добавиться *class*, с необходимыми **css** свойства.  
+
+В помощь:
+- [align-items](https://developer.mozilla.org/ru/docs/Web/CSS/align-items)
+- [vue css классы и стили](https://ru.vuejs.org/v2/guide/class-and-style.html)
+- [логические операторы](https://learn.javascript.ru/logical-operators)
+- [массивы](https://learn.javascript.ru/array)
+
+## Text input
+
+Данный элемент состоит из контейнера (`div`), внутри которого 3 элемента: иконка, поле ввода (`input`), текст (внутри `span`). Поле ввода должно занимать все оставшиеся место по ширине внутри родительского html контейнера. 
+Текст (`Message`) внутри компонента в **figma** - это атрибут `placeholder` у элемента input. 
+
+В помощь:
+- [flexbox](https://developer.mozilla.org/ru/docs/Learn/CSS/CSS_layout/Flexbox)
+- [align-items](https://developer.mozilla.org/ru/docs/Web/CSS/align-items)
+- [border](https://developer.mozilla.org/ru/docs/Web/CSS/border)
+- [border-radius](https://developer.mozilla.org/ru/docs/Web/CSS/border-radius)
+- [placeholder](http://htmlbook.ru/html/input/placeholder)
+- [flex-grow](https://developer.mozilla.org/ru/docs/Web/CSS/flex-grow)
+
+## Nav Icon
+
+В данном компоненте может присутствовать красная точка. Данное состояние лучше будет передавать через свойство (**props**) компоненту, к примеру `active`.
+Иконку внутрь компонента можно передавать через ```<slot></slot>```.
+
+Пример, как данный компонент может быть использован:
+``` vue
+<VNavIcon active>
+  <HomeIcon />
+</VNavIcon> 
+<VNavIcon>
+  <VAvatar src="/images/avatar.jpg" />
+</VNavIcon> 
+```
+Под первой иконкой (`HomeIcon`) должна быть добавлена красная кнопка, под второй (`VAvatar`) - нет. Как один из способов это можно сделать через псевдоэлемент `::after`. 
+
+::: warning
+Обратите внимание, что псевдоэлемент `::after` и `::before` не применяются на `<img>`.
+:::
+
+::: tip
+Если указано у элемента только имя атрибута (`active`) без значения, то это означает, что передается `Boolean` тип со значением `true`.
+:::
+
+В помощь:
+- [Псевдоэлементы](https://developer.mozilla.org/ru/docs/Web/CSS/Pseudo-elements)
+- [::after](https://developer.mozilla.org/ru/docs/Web/CSS/::after)
+- [position](https://developer.mozilla.org/ru/docs/Web/CSS/position)
